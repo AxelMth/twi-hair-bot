@@ -7,6 +7,7 @@ on:
 
 jobs:
   run:
+    name: Tweet new hair salon
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -20,9 +21,6 @@ jobs:
       - name: Install Newman
         run: npm install -g newman
 
-      - name: LS
-        run: ls -l
-
       - name: Sed
         run: |
           sed -i -e 's/\$CONSUMER_KEY/'"${{ secrets.CONSUMER_KEY }}"'/g' -e 's/\$CONSUMER_SECRET/'"${{ secrets.CONSUMER_SECRET }}"'/g' -e 's/\$ACCESS_TOKEN_KEY/'"${{ secrets.ACCESS_TOKEN_KEY }}"'/g' -e 's/\$ACCESS_TOKEN_SECRET/'"${{ secrets.ACCESS_TOKEN_SECRET }}"'/g' twit-hair-bot.postman_environment.json
@@ -31,7 +29,8 @@ jobs:
         run: |
           name=$(jq '.data.features[0].properties.nom' coiffeurs.json | tr -d '"')
           city=$(jq '.data.features[0].properties.ville' coiffeurs.json | tr -d '"')
-          sed -i -e 's/\$name/$name/g' -e 's/\$city/$city/g' twitter.postman_collection.json
+          echo $name $city
+          sed -i -e 's/\$name/'$name'/g' -e 's/\$city/'$city'/g' twitter.postman_collection.json
 
       - name: Postman
         run: |
