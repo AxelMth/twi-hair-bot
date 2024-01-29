@@ -27,6 +27,11 @@ jobs:
         run: |
           sed -i -e 's/\$CONSUMER_KEY/'"${{ secrets.CONSUMER_KEY }}"'/g' -e 's/\$CONSUMER_SECRET/'"${{ secrets.CONSUMER_SECRET }}"'/g' -e 's/\$ACCESS_TOKEN_KEY/'"${{ secrets.ACCESS_TOKEN_KEY }}"'/g' -e 's/\$ACCESS_TOKEN_SECRET/'"${{ secrets.ACCESS_TOKEN_SECRET }}"'/g' twit-hair-bot.postman_environment.json
 
+      - name: Replace text
+        run: |
+          message=$(jq '.data.features[0].properties | "Salon de coiffure: \(.nom)\nVille: \(.ville)"' coiffeurs.json)
+          sed -i -e 's/\$MESSAGE/'"$message"'/g' twitter.postman_collection.json
+
       - name: Postman
         run: |
           newman run twitter.postman_collection.json -e twit-hair-bot.postman_environment.json
