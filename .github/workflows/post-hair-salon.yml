@@ -29,4 +29,4 @@ jobs:
 
       - name: Postman
         run: |
-          newman run twitter.postman_collection.json -e postman_environment.json
+          newman run twitter.postman_collection.json -e twit-hair-bot.postman_environment.json
