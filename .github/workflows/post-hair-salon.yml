@@ -27,11 +27,9 @@ jobs:
 
       - name: Replace text
         run: |
-          start_date="2024-01-28"
-          current_date=$(date -j -u "+%Y-%m-%d")
-          start_seconds=$(date -j -f "%Y-%m-%d" "$start_date" "+%s")
-          current_seconds=$(date -j -f "%Y-%m-%d" "$current_date" "+%s")
-          number_of_days=$(( (current_seconds - start_seconds) / 86400 ))
+          start_date="2022-01-01"
+          current_date=$(date +%Y-%m-%d)
+          number_of_days=$(($(($(date -u -d "$current_date" +"%s") - $(date -u -d "$start_date" +"%s"))) / 86400))
         
           echo "Number of days since $start_date: $number_of_days"
           
