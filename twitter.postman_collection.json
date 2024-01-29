@@ -13,6 +13,11 @@
 					"type": "oauth1",
 					"oauth1": [
 						{
+							"key": "addParamsToHeader",
+							"value": true,
+							"type": "boolean"
+						},
+						{
 							"key": "tokenSecret",
 							"value": "{{ACCESS_TOKEN_SECRET}}",
 							"type": "string"
@@ -31,11 +36,6 @@
 							"key": "consumerKey",
 							"value": "{{CONSUMER_KEY}}",
 							"type": "string"
-						},
-						{
-							"key": "addParamsToHeader",
-							"value": true,
-							"type": "boolean"
 						},
 						{
 							"key": "signatureMethod",
@@ -58,7 +58,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"text\": \"$MESSAGE\"\n}",
+					"raw": "{\n    \"text\": \"Salon de coiffure: $name\\nVille: $city\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
