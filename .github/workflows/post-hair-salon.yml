@@ -30,7 +30,7 @@ jobs:
       - name: Replace text
         run: |
           message=$(jq '.data.features[0].properties | "Salon de coiffure: \(.nom)\nVille: \(.ville)"' coiffeurs.json)
-          sed -i -e 's/\$MESSAGE/'"$message"'/g' twitter.postman_collection.json
+          sed -i -e 's/\$MESSAGE/'$message'/g' twitter.postman_collection.json
 
       - name: Postman
         run: |
