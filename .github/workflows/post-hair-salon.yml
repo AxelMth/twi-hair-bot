@@ -30,7 +30,7 @@ jobs:
           name=$(jq '.data.features[0].properties.nom' coiffeurs.json | tr -d '"')
           city=$(jq '.data.features[0].properties.ville' coiffeurs.json | tr -d '"')
           echo $name $city
-          sed -i -e 's/\$name/'$name'/g' -e 's/\$city/'$city'/g' twitter.postman_collection.json
+          sed -i -e 's/\$name/\'$name\'/g' -e 's/\$city/\'$city\'/g' twitter.postman_collection.json
 
       - name: Postman
         run: |
