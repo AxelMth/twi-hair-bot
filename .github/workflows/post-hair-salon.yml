@@ -40,6 +40,8 @@ jobs:
 
       - name: Commit and push changes
         run: |
+          git config --global user.email "${{ secrets.EMAIL }}"
+          git config --global user.name "${{ secrets.NAME }}"
           git add index.txt
           git commit -m "Update index"
           git push origin main
