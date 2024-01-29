@@ -27,21 +27,19 @@ jobs:
 
       - name: Replace text
         run: |
-          index=$(cat index.txt)
-          name=$(jq '.data.features[0].properties.nom' coiffeurs.json | tr -d '"')
-          city=$(jq '.data.features[0].properties.ville' coiffeurs.json | tr -d '"')
+          start_date="2024-01-28"
+          current_date=$(date -j -u "+%Y-%m-%d")
+          start_seconds=$(date -j -f "%Y-%m-%d" "$start_date" "+%s")
+          current_seconds=$(date -j -f "%Y-%m-%d" "$current_date" "+%s")
+          number_of_days=$(( (current_seconds - start_seconds) / 86400 ))
+        
+          echo "Number of days since $start_date: $number_of_days"
+          
+          name=$(jq '.data.features[$number_of_days].properties.nom' coiffeurs.json | tr -d '"')
+          city=$(jq '.data.features[$number_of_days].properties.ville' coiffeurs.json | tr -d '"')
           echo $name $city
           sed -i -e 's/\$name/'"$name"'/g' -e 's/\$city/'"$city"'/g' twitter.postman_collection.json
-          echo $(($index + 1)) > index.txt
 
       - name: Postman
         run: |
           newman run twitter.postman_collection.json -e twit-hair-bot.postman_environment.json
-
-      - name: Commit and push changes
-        run: |
-          git config --global user.email "${{ secrets.EMAIL }}"
-          git config --global user.name "${{ secrets.NAME }}"
-          git add index.txt
-          git commit -m "Update index"
-          git push origin main
