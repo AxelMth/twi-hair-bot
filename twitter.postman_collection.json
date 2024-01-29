@@ -1,0 +1,161 @@
+{
+	"info": {
+		"_postman_id": "70d4591c-66c6-44f8-8b8a-9419c1b5d494",
+		"name": "Twitter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28652765"
+	},
+	"item": [
+		{
+			"name": "https://api.twitter.com/2/tweets",
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "tokenSecret",
+							"value": "{{ACCESS_TOKEN_SECRET}}",
+							"type": "string"
+						},
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN_KEY}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{CONSUMER_SECRET}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{CONSUMER_KEY}}",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"text\": \"Hello World !\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.twitter.com/2/tweets",
+					"protocol": "https",
+					"host": [
+						"api",
+						"twitter",
+						"com"
+					],
+					"path": [
+						"2",
+						"tweets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://api.twitter.com/2/tweets/1752072258510594236",
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "addParamsToHeader",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "tokenSecret",
+							"value": "EOcJ8VAVcIFhgouH9AvkRgZHHqCEtdbBBO3BAOw3xNgdt",
+							"type": "string"
+						},
+						{
+							"key": "token",
+							"value": "1752033994072354816-hvhyI2dlLXA3lcxxoI0HcmEX0d1e3d",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "m4Lnjmiy2ZzP080XcTtrxZGV2RAzSfrb0J120U9QjFbdjUFYah",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "X6rfUrbIalgyVekKulQbtkKIX",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"text\": \"Hello World !\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.twitter.com/2/tweets/1752073323746390227",
+					"protocol": "https",
+					"host": [
+						"api",
+						"twitter",
+						"com"
+					],
+					"path": [
+						"2",
+						"tweets",
+						"1752073323746390227"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

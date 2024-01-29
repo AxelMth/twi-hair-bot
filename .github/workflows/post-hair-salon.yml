@@ -12,3 +12,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+
+      - name: Install Newman
+        run: npm install -g newman
+
+      - name: Sed
+        run: |
+          sed -i '' -e 's/\$CONSUMER_KEY/'"${{ secrets.CONSUMER_KEY }}"'/g' -e 's/\$CONSUMER_SECRET/'"${{ secrets.CONSUMER_SECRET }}"'/g' -e 's/\$ACCESS_TOKEN_KEY/'"${{ secrets.ACCESS_TOKEN_KEY }}"'/g' -e 's/\$ACCESS_TOKEN_SECRET/'"${{ secrets.$ACCESS_TOKEN_SECRET }}"'/g' twit-hait-bot.postman_environment.json
+
+      - name: Postman
+        run: |
+          newman run twitter.postman_collection.json -e postman_environment.json
