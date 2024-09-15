@@ -26,18 +26,15 @@ jobs:
           sed -i -e 's/\$CONSUMER_KEY/'"${{ secrets.CONSUMER_KEY }}"'/g' -e 's/\$CONSUMER_SECRET/'"${{ secrets.CONSUMER_SECRET }}"'/g' -e 's/\$ACCESS_TOKEN_KEY/'"${{ secrets.ACCESS_TOKEN_KEY }}"'/g' -e 's/\$ACCESS_TOKEN_SECRET/'"${{ secrets.ACCESS_TOKEN_SECRET }}"'/g' twit-hair-bot.postman_environment.json
 
       - name: Replace text
+        id: extract-hair-saloon-infos
+        uses: ./.github/actions/extract-hair-saloon-infos
+
+      - name: Replace argument in Postman Collection
         run: |
-          start_date="2024-01-28"
-          current_date=$(date +%Y-%m-%d)
-          number_of_days=$(($(($(date -u -d "$current_date" +"%s") - $(date -u -d "$start_date" +"%s"))) / 86400))
-        
-          echo "Number of days since $start_date: $number_of_days"
-          
-          name=$(jq --argjson number_of_days "$number_of_days" '.data.features[$number_of_days].properties.nom' coiffeurs.json | tr -d '"')
-          city=$(jq --argjson number_of_days "$number_of_days" '.data.features[$number_of_days].properties.ville' coiffeurs.json | tr -d '"')
-          echo $name $city
+          city="${{ steps.extract-hair-saloon-infos.outputs.city }}"
+          name="${{ steps.extract-hair-saloon-infos.outputs.name }}"
           sed -i -e 's/\$name/'"$name"'/g' -e 's/\$city/'"$city"'/g' twitter.postman_collection.json
 
-      - name: Postman
+      - name: Run Newman 
         run: |
           newman run twitter.postman_collection.json -e twit-hair-bot.postman_environment.json
