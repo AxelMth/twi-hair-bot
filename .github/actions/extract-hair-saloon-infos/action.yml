@@ -35,9 +35,11 @@ runs:
 
           echo "Formatted name: $formatted_name"
           echo "Formatted address: $formatted_address"
-          
+
           # Combine name and address to form the Google Maps URL
           google_maps_url="https://www.google.com/maps/?q=${formatted_name}+${formatted_address}"
+
+          echo "Google maps: $google_maps_url"
 
           # Output the city and name using GITHUB_OUTPUT
           echo "name=$name" >> $GITHUB_OUTPUT
