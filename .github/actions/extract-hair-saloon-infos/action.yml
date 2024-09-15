@@ -23,8 +23,17 @@ runs:
           
           name=$(jq --argjson number_of_days "$number_of_days" '.data.features[$number_of_days].properties.nom' coiffeurs.json | tr -d '"')
           city=$(jq --argjson number_of_days "$number_of_days" '.data.features[$number_of_days].properties.ville' coiffeurs.json | tr -d '"')
+          address=$(jq --argjson number_of_days "$number_of_days" '.data.features[$number_of_days].properties.addresse' coiffeurs.json | tr -d '"')
+
+          # URL encode spaces and special characters
+          formatted_name=$(echo "$name" | sed 's/ /+/g' | sed "s/'/%27/g")
+          formatted_address=$(echo "$address" | sed 's/ /+/g')
+
+          # Combine name and address to form the Google Maps URL
+          google_maps_url="https://www.google.com/maps/?q=${formatted_name}+${formatted_address}"
 
           # Output the city and name using GITHUB_OUTPUT
           echo "name=$name" >> $GITHUB_OUTPUT
           echo "city=$city" >> $GITHUB_OUTPUT
+          echo "google_maps_url=$google_maps_url" >> $GITHUB_OUTPUT
       shell: bash

@@ -58,7 +58,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"text\": \"Salon de coiffure: $name\\nVille: $city\"\n}",
+					"raw": "{\n    \"text\": \"💇Salon de coiffure: $name\\n📍Ville: $city ($region)\\n\\n:Google Maps: $google_maps_url\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
