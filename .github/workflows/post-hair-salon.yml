@@ -33,14 +33,14 @@ jobs:
         run: |
           city="${{ steps.extract-hair-saloon-infos.outputs.city }}"
           name="${{ steps.extract-hair-saloon-infos.outputs.name }}"
-          google_maps_url="${{ steps.extract-hair-saloon-infos.outputs.name }}"
+          google_maps_url="${{ steps.extract-hair-saloon-infos.outputs.google_maps_url }}"
 
           echo "city=$city"
           echo "name=$name"
           echo "google_maps_url=$google_maps_url"
-          
-          sed -i -e 's/\$name/'"$name"'/g' -e 's/\$city/'"$city"'/g' -e 's/\$google_maps_url/'"$google_maps_url"'/g' twitter.postman_collection.json
 
-      - name: Run Newman 
-        run: |
-          newman run twitter.postman_collection.json -e twit-hair-bot.postman_environment.json
+      #     sed -i -e 's/\$name/'"$name"'/g' -e 's/\$city/'"$city"'/g' -e 's/\$google_maps_url/'"$google_maps_url"'/g' twitter.postman_collection.json
+
+      # - name: Run Newman 
+      #   run: |
+      #     newman run twitter.postman_collection.json -e twit-hair-bot.postman_environment.json
