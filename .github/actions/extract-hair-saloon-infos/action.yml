@@ -40,4 +40,3 @@ runs:
 
           echo "lat=$lat" >> $GITHUB_OUTPUT
           echo "lng=$lng" >> $GITHUB_OUTPUT
-      shell: bash
