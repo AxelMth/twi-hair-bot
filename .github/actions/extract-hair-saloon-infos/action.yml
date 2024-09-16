@@ -7,14 +7,19 @@ inputs:
 outputs:
   name:
     description: The name of the hair salon
+    value: ${{ steps.extract-hair-salon-infos.outputs.name }}
   city:
     description: The city of the hair salon
+    value: ${{ steps.extract-hair-salon-infos.outputs.city }}
   zipCode:
     description: The zip code of the hair salon
+    value: ${{ steps.extract-hair-salon-infos.outputs.zipCode }}
   lat:
     description: The lat of the hair salon
+    value: ${{ steps.extract-hair-salon-infos.outputs.lat }}
   lng:
-    description: The longitute of the hair salon 
+    description: The longitute of the hair salon
+    value: ${{ steps.extract-hair-salon-infos.outputs.lng }}
 runs:
   using: composite
   steps:
