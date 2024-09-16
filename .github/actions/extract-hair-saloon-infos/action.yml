@@ -5,10 +5,16 @@ inputs:
     description: Index of the hair salon
     required: true
 outputs:
-  city:
-    description: The city of the hair salon
   name:
     description: The name of the hair salon
+  city:
+    description: The city of the hair salon
+  zipCode:
+    description: The zip code of the hair salon
+  lat:
+    description: The lat of the hair salon
+  lng:
+    description: The longitute of the hair salon 
 runs:
   using: composite
   steps:
@@ -23,26 +29,15 @@ runs:
           
           name=$(jq --argjson number_of_days "$number_of_days" '.data.features[$number_of_days].properties.nom' coiffeurs.json | tr -d '"')
           city=$(jq --argjson number_of_days "$number_of_days" '.data.features[$number_of_days].properties.ville' coiffeurs.json | tr -d '"')
-          address=$(jq --argjson number_of_days "$number_of_days" '.data.features[$number_of_days].properties.addresse' coiffeurs.json | tr -d '"')
+          zipCode=$(jq --argjson number_of_days "$number_of_days" '.data.features[$number_of_days].properties.codepostal' coiffeurs.json | tr -d '"')
 
-          echo "Name: $name"
-          echo "City: $city"
-          echo "Address: $address"
+          lat=$(jq --argjson number_of_days "$number_of_days" '.data.features[$number_of_days].properties.lat' coiffeurs.json)
+          lng=$(jq --argjson number_of_days "$number_of_days" '.data.features[$number_of_days].properties.lng' coiffeurs.json)
 
-          # URL encode spaces and special characters
-          formatted_name=$(echo "$name" | sed 's/ /+/g' | sed "s/'/%27/g")
-          formatted_address=$(echo "$address" | sed 's/ /+/g')
-
-          echo "Formatted name: $formatted_name"
-          echo "Formatted address: $formatted_address"
-
-          # Combine name and address to form the Google Maps URL
-          google_maps_url="https://www.google.com/maps/?q=${formatted_name}+${formatted_address}"
-
-          echo "Google maps: $google_maps_url"
-
-          # Output the city and name using GITHUB_OUTPUT
           echo "name=$name" >> $GITHUB_OUTPUT
           echo "city=$city" >> $GITHUB_OUTPUT
-          echo "google_maps_url=$google_maps_url" >> $GITHUB_OUTPUT
+          echo "zipCode=$zipCode" >> $GITHUB_OUTPUT
+
+          echo "lat=$lat" >> $GITHUB_OUTPUT
+          echo "lng=$lng" >> $GITHUB_OUTPUT
       shell: bash

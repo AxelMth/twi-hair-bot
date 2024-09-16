@@ -33,11 +33,17 @@ jobs:
         run: |
           city="${{ steps.extract-hair-saloon-infos.outputs.city }}"
           name="${{ steps.extract-hair-saloon-infos.outputs.name }}"
-          google_maps_url="${{ steps.extract-hair-saloon-infos.outputs.google_maps_url }}"
+          zipCode="${{ steps.extract-hair-saloon-infos.outputs.zipCode }}"
+          lat="${{ steps.extract-hair-saloon-infos.outputs.lat }}"
+          lng="${{ steps.extract-hair-saloon-infos.outputs.lng }}"
 
           echo "city=$city"
           echo "name=$name"
-          echo "google_maps_url=$google_maps_url"
+          echo "zipCode=$zipCode"
+          echo "lat=$lat"
+          echo "lng=$lng"
+
+          echo "https://maps.googleapis.com/maps/api/streetview?size=600x300&location=$lat,$lng&key=${{ secrets.GOOGLE_MAPS_API_KEY }}"
 
       #     sed -i -e 's/\$name/'"$name"'/g' -e 's/\$city/'"$city"'/g' -e 's/\$google_maps_url/'"$google_maps_url"'/g' twitter.postman_collection.json
 
