@@ -1,0 +1,22 @@
+{
+  "name": "twi-hair-bot",
+  "version": "1.0.0",
+  "description": "A twitter bot that tweets every day a new hai salon with a word game in it",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AxelMth/twi-hair-bot.git"
+  },
+  "author": "Axel Mathieu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AxelMth/twi-hair-bot/issues"
+  },
+  "homepage": "https://github.com/AxelMth/twi-hair-bot#readme",
+  "dependencies": {
+    "twitter-api-v2": "^1.17.2"
+  }
+}
