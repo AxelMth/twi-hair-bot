@@ -26,16 +26,16 @@ jobs:
           sed -i -e 's/\$CONSUMER_KEY/'"${{ secrets.CONSUMER_KEY }}"'/g' -e 's/\$CONSUMER_SECRET/'"${{ secrets.CONSUMER_SECRET }}"'/g' -e 's/\$ACCESS_TOKEN_KEY/'"${{ secrets.ACCESS_TOKEN_KEY }}"'/g' -e 's/\$ACCESS_TOKEN_SECRET/'"${{ secrets.ACCESS_TOKEN_SECRET }}"'/g' twit-hair-bot.postman_environment.json
 
       - name: Replace text
-        id: extract-hair-saloon-infos
+        id: extract-hair-salon-infos
         uses: ./.github/actions/extract-hair-saloon-infos
 
       - name: Replace argument in Postman Collection
         run: |
-          city="${{ steps.extract-hair-saloon-infos.outputs.city }}"
-          name="${{ steps.extract-hair-saloon-infos.outputs.name }}"
-          zipCode="${{ steps.extract-hair-saloon-infos.outputs.zipCode }}"
-          lat="${{ steps.extract-hair-saloon-infos.outputs.lat }}"
-          lng="${{ steps.extract-hair-saloon-infos.outputs.lng }}"
+          city="${{ steps.extract-hair-salon-infos.outputs.city }}"
+          name="${{ steps.extract-hair-salon-infos.outputs.name }}"
+          zipCode="${{ steps.extract-hair-salon-infos.outputs.zipCode }}"
+          lat="${{ steps.extract-hair-salon-infos.outputs.lat }}"
+          lng="${{ steps.extract-hair-salon-infos.outputs.lng }}"
 
           echo "city=$city"
           echo "name=$name"
