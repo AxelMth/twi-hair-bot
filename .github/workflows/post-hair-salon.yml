@@ -3,7 +3,7 @@ name: Post new hair salon
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: "0 0 * * *"
 
 jobs:
   run:
@@ -16,37 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20'
+          node-version: "20"
 
-      - name: Install Newman
-        run: npm install -g newman
-
-      - name: Sed
-        run: |
-          sed -i -e 's/\$CONSUMER_KEY/'"${{ secrets.CONSUMER_KEY }}"'/g' -e 's/\$CONSUMER_SECRET/'"${{ secrets.CONSUMER_SECRET }}"'/g' -e 's/\$ACCESS_TOKEN_KEY/'"${{ secrets.ACCESS_TOKEN_KEY }}"'/g' -e 's/\$ACCESS_TOKEN_SECRET/'"${{ secrets.ACCESS_TOKEN_SECRET }}"'/g' twit-hair-bot.postman_environment.json
-
-      - name: Replace text
-        id: extract-hair-salon-infos
-        uses: ./.github/actions/extract-hair-saloon-infos
-
-      - name: Replace argument in Postman Collection
-        run: |
-          city="${{ steps.extract-hair-salon-infos.outputs.city }}"
-          name="${{ steps.extract-hair-salon-infos.outputs.name }}"
-          zipCode="${{ steps.extract-hair-salon-infos.outputs.zipCode }}"
-          lat="${{ steps.extract-hair-salon-infos.outputs.lat }}"
-          lng="${{ steps.extract-hair-salon-infos.outputs.lng }}"
-
-          echo "city=$city"
-          echo "name=$name"
-          echo "zipCode=$zipCode"
-          echo "lat=$lat"
-          echo "lng=$lng"
-
-          echo "https://maps.googleapis.com/maps/api/streetview?size=600x300&location=$lat,$lng&key=${{ secrets.GOOGLE_MAPS_API_KEY }}"
-
-      #     sed -i -e 's/\$name/'"$name"'/g' -e 's/\$city/'"$city"'/g' -e 's/\$google_maps_url/'"$google_maps_url"'/g' twitter.postman_collection.json
-
-      # - name: Run Newman 
-      #   run: |
-      #     newman run twitter.postman_collection.json -e twit-hair-bot.postman_environment.json
+      - name: Tweet new hair salon
+        run: npx ts-node src/index.ts
