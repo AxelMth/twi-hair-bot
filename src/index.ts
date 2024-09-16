@@ -27,8 +27,8 @@ function getHairSalon(index: number): HairSalon {
 }
 
 const client = new TwitterApi({
-  appKey: process.env.TWITTER_APP_KEY as string,
-  appSecret: process.env.TWITTER_APP_SECRET as string,
+  appKey: process.env.TWITTER_CONSUMER_KEY as string,
+  appSecret: process.env.TWITTER_CONSUMER_SECRET as string,
   accessToken: process.env.TWITTER_ACCESS_TOKEN as string,
   accessSecret: process.env.TWITTER_ACCESS_SECRET as string,
 });
