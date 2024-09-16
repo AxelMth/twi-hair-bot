@@ -1,10 +1,12 @@
-# twi-hair-bot
+# Twit'Hair
 
 ## Overview
 
 `twi-hair-bot` is a bot that tweets daily information about hair salons. It retrieves data from a JSON file and posts it to Twitter using the Twitter API.
 
-Dataset used: [Les coiffeurs sont des blagueurs](https://www.data.gouv.fr/fr/reuses/les-coiffeurs-sont-des-blagueurs/)
+[X Account](https://x.com/twit_hair_bot)
+
+[Dataset used](https://www.data.gouv.fr/fr/reuses/les-coiffeurs-sont-des-blagueurs/)
 
 ## Configuration
 
