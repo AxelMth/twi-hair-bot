@@ -1,5 +1,5 @@
 {
-  "name": "twi-hair-bot",
+  "name": "twit-hair",
   "version": "1.0.0",
   "description": "A twitter bot that tweets every day a new hai salon with a word game in it",
   "main": "index.js",
