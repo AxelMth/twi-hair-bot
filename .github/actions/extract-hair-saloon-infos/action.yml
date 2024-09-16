@@ -34,6 +34,8 @@ runs:
           lat=$(jq --argjson number_of_days "$number_of_days" '.data.features[$number_of_days].properties.lat' coiffeurs.json)
           lng=$(jq --argjson number_of_days "$number_of_days" '.data.features[$number_of_days].properties.lng' coiffeurs.json)
 
+          echo "$name, $city, $zipCode, $lat, $lng"
+          
           echo "name=$name" >> $GITHUB_OUTPUT
           echo "city=$city" >> $GITHUB_OUTPUT
           echo "zipCode=$zipCode" >> $GITHUB_OUTPUT
