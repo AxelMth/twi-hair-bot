@@ -1,6 +1,7 @@
 import axios from "axios";
 import path from "path";
 import fs from "fs";
+import { GooglePlace } from "../interfaces/hair-salon";
 
 /**
  * Fetches the Street View image from Google Maps API and saves it locally.
@@ -44,4 +45,27 @@ export async function fetchStreetViewImage(
       console.error("Error fetching the Street View image:", error.message);
     }
   }
+}
+
+/**
+ * Finds a place using the Google Maps Places API.
+ * @param text - The text to search for.
+ * @returns The place data.
+ */
+export async function findPlaceFromText(text: string): Promise<GooglePlace> {
+  const apiKey = process.env.GOOGLE_MAPS_API_KEY;
+  const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${encodeURI(
+    text
+  )}&inputtype=textquery&fields=geometry&key=${apiKey}`;
+  const place = await axios.get<{
+    status: string;
+    candidates: GooglePlace[];
+  }>(url);
+  if (place.data.status !== "OK") {
+    throw new Error(`Error fetching place: ${place.status}`);
+  }
+  if (!place.data.candidates || place.data.candidates.length === 0) {
+    throw new Error(`No results found for: ${text}`);
+  }
+  return place.data.candidates[0];
 }
